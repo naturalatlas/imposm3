@@ -2,11 +2,13 @@ package mapping
 
 import (
 	"testing"
+	"time"
+
 
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/naturalatlas/imposm3/geom"
+	"github.com/naturalatlas/imposm3/geom/geos"
+	"github.com/naturalatlas/imposm3/mapping/config"
 )
 
 func TestBool(t *testing.T) {
@@ -351,4 +353,28 @@ func TestHstoreString(t *testing.T) {
 		t.Error("unexpected value", actual)
 	}
 
+}
+
+func TestTimestamp(t *testing.T) {
+	match := Match{}
+
+	timestamp, err := time.Parse(time.RFC3339, "2014-11-12T11:45:26.371Z")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+	
+	elem := &osm.Element{}
+
+	elem.Tags = osm.Tags{} // missing
+	elem.Metadata = &osm.Metadata{
+		Version:   1,
+		Timestamp: timestamp,
+		Changeset: 1,
+		UserID:    1,
+		UserName:  "test",
+	}
+	if v := Timestamp("", elem, nil, match); v != timestamp {
+		t.Errorf(" -> %v", v)
+	}
 }

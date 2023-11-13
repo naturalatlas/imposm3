@@ -8,17 +8,17 @@ import (
 	"path/filepath"
 
 	"github.com/omniscale/go-osm/state"
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/database"
-	_ "github.com/omniscale/imposm3/database/postgis"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/reader"
-	"github.com/omniscale/imposm3/stats"
-	"github.com/omniscale/imposm3/update"
-	"github.com/omniscale/imposm3/writer"
+	"github.com/naturalatlas/imposm3/cache"
+	"github.com/naturalatlas/imposm3/config"
+	"github.com/naturalatlas/imposm3/database"
+	_ "github.com/naturalatlas/imposm3/database/postgis"
+	"github.com/naturalatlas/imposm3/geom/limit"
+	"github.com/naturalatlas/imposm3/log"
+	"github.com/naturalatlas/imposm3/mapping"
+	"github.com/naturalatlas/imposm3/reader"
+	"github.com/naturalatlas/imposm3/stats"
+	"github.com/naturalatlas/imposm3/update"
+	"github.com/naturalatlas/imposm3/writer"
 )
 
 func Import(importOpts config.Import) {

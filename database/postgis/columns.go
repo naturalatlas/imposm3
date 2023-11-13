@@ -3,7 +3,7 @@ package postgis
 import (
 	"fmt"
 
-	"github.com/omniscale/imposm3/log"
+	"github.com/naturalatlas/imposm3/log"
 )
 
 type ColumnType interface {
@@ -74,6 +74,7 @@ func init() {
 		"int64":              &simpleColumnType{"BIGINT"},
 		"float32":            &simpleColumnType{"REAL"},
 		"hstore_string":      &simpleColumnType{"HSTORE"},
+		"time.Time":          &simpleColumnType{"TIMESTAMPTZ"},
 		"geometry":           &geometryType{"GEOMETRY"},
 		"validated_geometry": &validatedGeometryType{geometryType{"GEOMETRY"}},
 	}

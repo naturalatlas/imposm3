@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/naturalatlas/imposm3/geom"
+	"github.com/naturalatlas/imposm3/mapping/config"
 )
 
 func MakeCategorizeInt(fieldName string, fieldType ColumnType, field config.Column) (MakeValue, error) {

@@ -7,10 +7,10 @@ import (
 	"strings"
 
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/log"
+	"github.com/naturalatlas/imposm3/log"
 
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/naturalatlas/imposm3/geom"
+	"github.com/naturalatlas/imposm3/mapping/config"
 	"github.com/pkg/errors"
 )
 
@@ -44,6 +44,7 @@ func init() {
 		"categorize_int":             {Name: "categorize_int", GoType: "int32", MakeFunc: MakeCategorizeInt},
 		"geojson_intersects":         {Name: "geojson_intersects", GoType: "bool", MakeFunc: MakeIntersectsField},
 		"geojson_intersects_feature": {Name: "geojson_intersects_feature", GoType: "string", MakeFunc: MakeIntersectsFeatureField},
+		"timestamp":                  {"timestamp", "time.Time", Timestamp, nil, nil, false},
 	}
 }
 
@@ -92,6 +93,10 @@ func Integer(val string, elem *osm.Element, geom *geom.Geometry, match Match) in
 
 func ID(val string, elem *osm.Element, geom *geom.Geometry, match Match) interface{} {
 	return elem.ID
+}
+
+func Timestamp(val string, elem *osm.Element, geom *geom.Geometry, match Match) interface{} {
+	return elem.Metadata.Timestamp
 }
 
 func KeyName(val string, elem *osm.Element, geom *geom.Geometry, match Match) interface{} {
@@ -419,4 +424,25 @@ func MakeSuffixReplace(columnName string, columnType ColumnType, column config.C
 	}
 
 	return suffixReplace, nil
+}
+
+func MakeTimestampField(columnName string, columnType ColumnType, column config.Column) (MakeValue, error) {
+	values, err := decodeEnumArg(column, "values")
+	if err != nil {
+		return nil, err
+	}
+	enumerate := func(val string, elem *osm.Element, geom *geom.Geometry, match Match) interface{} {
+		if column.Key != "" {
+			if r, ok := values[val]; ok {
+				return r
+			}
+			return 0
+		}
+		if r, ok := values[match.Value]; ok {
+			return r
+		}
+		return 0
+	}
+
+	return enumerate, nil
 }

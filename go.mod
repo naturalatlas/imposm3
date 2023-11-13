@@ -1,4 +1,4 @@
-module github.com/omniscale/imposm3
+module github.com/naturalatlas/imposm3
 
 go 1.12
 

@@ -7,7 +7,7 @@ import (
 	"runtime/pprof"
 	"time"
 
-	"github.com/omniscale/imposm3/log"
+	"github.com/naturalatlas/imposm3/log"
 )
 
 func MemProfiler(dir string, interval time.Duration) {

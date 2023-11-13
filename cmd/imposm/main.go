@@ -6,13 +6,13 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/omniscale/imposm3"
-	"github.com/omniscale/imposm3/cache/query"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/import_"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/stats"
-	"github.com/omniscale/imposm3/update"
+	"github.com/naturalatlas/imposm3"
+	"github.com/naturalatlas/imposm3/cache/query"
+	"github.com/naturalatlas/imposm3/config"
+	"github.com/naturalatlas/imposm3/import_"
+	"github.com/naturalatlas/imposm3/log"
+	"github.com/naturalatlas/imposm3/stats"
+	"github.com/naturalatlas/imposm3/update"
 )
 
 func PrintCmds() {

@@ -2,11 +2,11 @@ package update
 
 import (
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/database"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/mapping"
+	"github.com/naturalatlas/imposm3/cache"
+	"github.com/naturalatlas/imposm3/database"
+	"github.com/naturalatlas/imposm3/element"
+	"github.com/naturalatlas/imposm3/expire"
+	"github.com/naturalatlas/imposm3/mapping"
 )
 
 type Deleter struct {

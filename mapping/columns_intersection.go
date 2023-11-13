@@ -6,11 +6,11 @@ import (
 	"sync"
 
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/geom/geojson"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/mapping/config"
-	"github.com/omniscale/imposm3/proj"
+	"github.com/naturalatlas/imposm3/geom"
+	"github.com/naturalatlas/imposm3/geom/geojson"
+	"github.com/naturalatlas/imposm3/geom/geos"
+	"github.com/naturalatlas/imposm3/mapping/config"
+	"github.com/naturalatlas/imposm3/proj"
 )
 
 type syncedPreparedGeom struct {

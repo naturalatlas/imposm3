@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	osm "github.com/omniscale/go-osm"
-	"github.com/omniscale/imposm3/cache/binary"
+	"github.com/naturalatlas/imposm3/cache/binary"
 )
 
 type byID []osm.Node

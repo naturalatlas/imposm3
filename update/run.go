@@ -10,11 +10,11 @@ import (
 
 	"github.com/omniscale/go-osm/replication/diff"
 	"github.com/omniscale/go-osm/state"
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/log"
+	"github.com/naturalatlas/imposm3/cache"
+	"github.com/naturalatlas/imposm3/config"
+	"github.com/naturalatlas/imposm3/expire"
+	"github.com/naturalatlas/imposm3/geom/limit"
+	"github.com/naturalatlas/imposm3/log"
 )
 
 func Run(baseOpts config.Base) {
