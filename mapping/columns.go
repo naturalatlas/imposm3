@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	osm "github.com/omniscale/go-osm"
 	"github.com/naturalatlas/imposm3/log"
+	osm "github.com/omniscale/go-osm"
 
 	"github.com/naturalatlas/imposm3/geom"
 	"github.com/naturalatlas/imposm3/mapping/config"
@@ -96,6 +96,9 @@ func ID(val string, elem *osm.Element, geom *geom.Geometry, match Match) interfa
 }
 
 func Timestamp(val string, elem *osm.Element, geom *geom.Geometry, match Match) interface{} {
+	if elem.Metadata == nil {
+		return nil
+	}
 	return elem.Metadata.Timestamp
 }
 

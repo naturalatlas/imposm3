@@ -2,6 +2,7 @@ package binary
 
 import (
 	"testing"
+	"time"
 
 	osm "github.com/omniscale/go-osm"
 )
@@ -24,6 +25,10 @@ func TestMarshalNode(t *testing.T) {
 	node.Tags = make(osm.Tags)
 	node.Tags["name"] = "test"
 	node.Tags["place"] = "city"
+	timestamp := time.Now()
+	node.Metadata = &osm.Metadata{
+		Timestamp: timestamp,
+	}
 
 	data, _ := MarshalNode(node)
 	node, _ = UnmarshalNode(data)
@@ -33,6 +38,9 @@ func TestMarshalNode(t *testing.T) {
 	}
 	if node.Tags["place"] != "city" {
 		t.Error("place tag does not match")
+	}
+	if node.Metadata.Timestamp.Unix() != timestamp.Unix() {
+		t.Error("timestamp does not match")
 	}
 
 	if len(node.Tags) != 2 {

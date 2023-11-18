@@ -1,6 +1,10 @@
 package binary
 
-import osm "github.com/omniscale/go-osm"
+import (
+	"time"
+
+	osm "github.com/omniscale/go-osm"
+)
 
 const coordFactor float64 = 11930464.7083 // ((2<<31)-1)/360.0
 
@@ -16,6 +20,9 @@ func MarshalNode(node *osm.Node) ([]byte, error) {
 	pbfNode := &Node{}
 	pbfNode.fromWgsCoord(node.Long, node.Lat)
 	pbfNode.Tags = tagsAsArray(node.Tags)
+	if node.Metadata != nil {
+		pbfNode.Timestamp = node.Metadata.Timestamp.Unix();
+	}
 	return pbfNode.Marshal()
 }
 
@@ -29,6 +36,9 @@ func UnmarshalNode(data []byte) (node *osm.Node, err error) {
 	node = &osm.Node{}
 	node.Long, node.Lat = pbfNode.wgsCoord()
 	node.Tags = tagsFromArray(pbfNode.Tags)
+	node.Metadata = &osm.Metadata{
+		Timestamp: time.Unix(pbfNode.Timestamp, 0),
+	}
 	return node, nil
 }
 
@@ -57,6 +67,9 @@ func MarshalWay(way *osm.Way) ([]byte, error) {
 	deltaPack(way.Refs)
 	pbfWay.Refs = way.Refs
 	pbfWay.Tags = tagsAsArray(way.Tags)
+	if way.Metadata != nil {
+		pbfWay.Timestamp = way.Metadata.Timestamp.Unix();
+	}
 	return pbfWay.Marshal()
 }
 
@@ -71,6 +84,9 @@ func UnmarshalWay(data []byte) (way *osm.Way, err error) {
 	deltaUnpack(pbfWay.Refs)
 	way.Refs = pbfWay.Refs
 	way.Tags = tagsFromArray(pbfWay.Tags)
+	way.Metadata = &osm.Metadata{
+		Timestamp: time.Unix(pbfWay.Timestamp, 0),
+	}
 	return way, nil
 }
 
@@ -85,6 +101,9 @@ func MarshalRelation(relation *osm.Relation) ([]byte, error) {
 		pbfRelation.MemberRoles[i] = m.Role
 	}
 	pbfRelation.Tags = tagsAsArray(relation.Tags)
+	if relation.Metadata != nil {
+		pbfRelation.Timestamp = relation.Metadata.Timestamp.Unix();
+	}
 	return pbfRelation.Marshal()
 }
 
@@ -104,5 +123,8 @@ func UnmarshalRelation(data []byte) (relation *osm.Relation, err error) {
 	}
 	//relation.Nodes = pbfRelation.Node
 	relation.Tags = tagsFromArray(pbfRelation.Tags)
+	relation.Metadata = &osm.Metadata{
+		Timestamp: time.Unix(pbfRelation.Timestamp, 0),
+	}
 	return relation, nil
 }

@@ -20,7 +20,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-var skipCoords, skipNodes, skipWays bool
+var skipCoords, skipNodes, skipWays, includeMetadata bool
 var nParser, nWays, nRels, nNodes, nCoords int64
 
 func init() {
@@ -32,6 +32,9 @@ func init() {
 	}
 	if os.Getenv("IMPOSM_SKIP_WAYS") != "" {
 		skipWays = true
+	}
+	if os.Getenv("IMPOSM_INCLUDE_METADATA") != "" {
+		includeMetadata = true
 	}
 	if procConf := os.Getenv("IMPOSM_READ_PROCS"); procConf != "" {
 		parts := strings.Split(procConf, ":")
@@ -72,6 +75,7 @@ func ReadPbf(
 		Nodes:     nodes,
 		Ways:      ways,
 		Relations: relations,
+		IncludeMetadata: includeMetadata,
 	}
 
 	// wait for all coords/nodes to be processed before continuing with
